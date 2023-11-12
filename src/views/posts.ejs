@@ -1,0 +1,52 @@
+<% include partials/_header %>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Post Creation Section -->
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header">Create a New Post</div>
+                <div class="card-body">
+                    <form action="/add" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Name" class="form-control" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="description" placeholder="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="author" placeholder="Author" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Display Section -->
+        <div class="col-md-12">
+            <% if (data) { %>
+                <% for(var i=data.length - 1; i >= 0 ; i--) { %>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= data[i].name %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">By <%= data[i].author %>
+                            </h6>
+                            <p class="card-text">
+                                <%= data[i].description %>
+                            </p>
+                            <a href="/update/<%= data[i].id %>" class="card-link btn btn-info">Edit</a>
+                            <a href="/delete/<%= data[i].id %>" class="card-link btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                    <% } %>
+                        <% } %>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<% include partials/_footer %>
